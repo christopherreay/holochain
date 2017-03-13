@@ -99,11 +99,13 @@ func setupApp() (app *cli.App) {
 					return errors.New("join: missing required holochain-name argument")
 				}
 				name := c.Args()[1]
+				fmt.Printf("join is... cloning %s", root+"/"+name)
 				_, err := service.Clone(srcPath, root+"/"+name, false)
 				if err == nil {
 					if verbose {
 						fmt.Printf("joined %s from %s\n", name, srcPath)
 					}
+					fmt.Printf("join is... genChain %s", root+"/"+name)
 					err = genChain(service, name)
 				}
 				return err
